@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import argparse
 from argparse import RawTextHelpFormatter
 from ast import arg
@@ -39,15 +41,20 @@ def fuzz(payload):
         os.system(cmd)
         pass
 
-def gen_traversal(count, separator = '/'):
-    result = ""
-    for i in range(0,count):
-        result = result + '../'
+def gen_traversal(count, separator = '/', ignoreAppend = False):
+    result =  "../" * int(count)
 
-    
-    result = result.replace('/', separator)
-    #fuzz(result)
-    return result
+    if args.Append is not None and not ignoreAppend:
+        data = read_file(args.Append)
+        for d in data:       
+            res = ("../" * count) + d
+            fuzz(res.replace('/', separator))
+            print(res.replace('/', separator))
+        return ''
+    else:
+        result = result.replace('/', separator)
+        #fuzz(result)
+        return result
 
 
 def back_root(path, separator = '/'):
@@ -88,7 +95,7 @@ def range_list(rng, separator = '/', append = ''):
         data = read_file(args.Append)
         for d in data:
             for i in range(mi, mx + 1):
-                res = gen_traversal(i, separator) + d
+                res = gen_traversal(i, separator, ignoreAppend=True) + d
                 fuzz(res)
                 print(res)
         return

