@@ -31,7 +31,7 @@ options:
   -i                    use stdin pipe.
 
 ```
-## Examples:
+## Some Examples
 
 ```
 PS C:\sweetrav> python sweetrav.py -r 5-10 -A files.txt
