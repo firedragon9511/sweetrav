@@ -40,7 +40,7 @@ args = parser.parse_args()
 
 def prnt(payload, ignoreFuzz = False):
     if args.clear:
-        payload = payload.replace('//','').replace('\\\\', '\\')
+        payload = payload.replace('//','/').replace('\\\\', '\\')
     if not ignoreFuzz:
         fuzz(payload)
     print(payload)
