@@ -3,7 +3,8 @@
 import argparse
 from argparse import RawTextHelpFormatter
 from ast import arg
-import fileinput
+import base64
+import urllib.parse
 import sys
 import os
 
@@ -29,6 +30,7 @@ parser.add_argument('-r','--range', dest='range', action='store', type=str, help
 parser.add_argument('-a','--append', dest='append', action='store', type=str, help='append to final.', required=False, default='')
 parser.add_argument('-A','--Append', dest='Append', action='store', type=str, help='append to final using list. Ex.: -r 1-10 -A files.txt', required=False)
 parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='fuzz script. Ex.: -f "./script.sh FUZZ".', required=False)
+parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='Available encodings: urlencode, base64.', required=False)
 
 
 parser.add_argument('-t','--trim', dest='clear', help='replace duplicated bars.', action='store_true')
@@ -41,8 +43,16 @@ args = parser.parse_args()
 def prnt(payload, ignoreFuzz = False):
     if args.clear:
         payload = payload.replace('//','/').replace('\\\\', '\\')
+
+    if args.encoding is not None:
+        if args.encoding == 'base64':
+            payload = base64.b64encode(payload.encode('ascii')).decode('ascii')
+        if args.encoding == 'urlencode':
+            payload = urllib.parse.quote(payload)
+
     if not ignoreFuzz:
         fuzz(payload)
+
     print(payload)
     
 

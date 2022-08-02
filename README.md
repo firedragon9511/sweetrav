@@ -1,6 +1,6 @@
 ## Usage
 ```
-usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-A APPEND] [-f FUZZ] [-t] [-i]
+usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-A APPEND] [-f FUZZ] [-e ENCODING] [-t] [-i]
 
           __    __    _______                  _
          / /   / /   / / ____|                | |
@@ -27,6 +27,8 @@ options:
   -A APPEND, --Append APPEND
                         append to final using list. Ex.: -r 1-10 -A files.txt
   -f FUZZ, --fuzz FUZZ  fuzz script. Ex.: -f "./script.sh FUZZ".
+  -e ENCODING, --encoding ENCODING
+                        Available encodings: urlencode, base64.
   -t, --trim            replace duplicated bars.
   -i                    use stdin pipe.
 
