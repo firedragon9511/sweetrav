@@ -25,7 +25,7 @@ parser.add_argument('-d','--depth', dest='depth', action='store', type=int, help
 parser.add_argument('-s','--separator', dest='separator', action='store', type=str, help='Custom separator.', required=False, default='/')
 parser.add_argument('-r','--range', dest='range', action='store', type=str, help='Generate a list, ex.: 1-10.', required=False, default='/')
 parser.add_argument('-a','--append', dest='append', action='store', type=str, help='Append to final.', required=False, default='')
-parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='Fuzzy script, ex.: -f "./script.sh FUZZ".', required=False)
+parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='Fuzz script, ex.: -f "./script.sh FUZZ".', required=False)
 
 parser.add_argument('-i', dest='stdin', help='Use stdin pipe.', action='store_true')
 
