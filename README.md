@@ -28,7 +28,7 @@ options:
                         append to final using list. Ex.: -r 1-10 -A files.txt
   -f FUZZ, --fuzz FUZZ  fuzz script. Ex.: -f "./script.sh FUZZ".
   -e ENCODING, --encoding ENCODING
-                        Available encodings: urlencode, base64.
+                        Available encodings: urlencode, doubleencode, base64.
   -t, --trim            replace duplicated bars.
   -i                    use stdin pipe.
 
