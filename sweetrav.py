@@ -31,6 +31,8 @@ parser.add_argument('-a','--append', dest='append', action='store', type=str, he
 parser.add_argument('-A','--Append', dest='Append', action='store', type=str, help='append to final using list. Ex.: -r 1-10 -A files.txt', required=False)
 parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='fuzz script. Ex.: -f "./script.sh FUZZ".', required=False)
 parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='Available encodings: urlencode, doubleencode, base64.', required=False)
+parser.add_argument('-o','--output', dest='output', action='store', type=str, help='Save output to a file (append).', required=False)
+
 
 
 parser.add_argument('-t','--trim', dest='clear', help='replace duplicated bars.', action='store_true')
@@ -40,7 +42,11 @@ parser.add_argument('-i', dest='stdin', help='use stdin pipe.', action='store_tr
 
 args = parser.parse_args()
 
+
+
 def prnt(payload, ignoreFuzz = False):
+    global output_file
+
     if args.clear:
         payload = payload.replace('//','/').replace('\\\\', '\\')
 
@@ -51,6 +57,9 @@ def prnt(payload, ignoreFuzz = False):
             payload = urllib.parse.quote(payload)
         if args.encoding == 'doubleencode':
             payload = urllib.parse.quote(urllib.parse.quote(payload))
+
+    if args.output is not None:
+        output_file.write(payload + '\n')
 
     if not ignoreFuzz:
         fuzz(payload)
@@ -137,7 +146,10 @@ def range_list(rng, separator = '/', append = ''):
 
 
 stdin_input = []
+output_file = None
 
+if args.output is not None:
+    output_file = open(args.output, 'a+')
 
 if args.stdin:
     for line in sys.stdin:
@@ -157,3 +169,6 @@ if args.path is None and args.range is not None:
     exit()
 
 prnt(back_root(args.path,  args.separator) + args.append, ignoreFuzz=True )
+
+if output_file is not None:
+    output_file.close()
