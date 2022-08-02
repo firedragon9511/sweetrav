@@ -15,7 +15,7 @@ usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEN
 
 options:
   -h, --help            show this help message and exit
-  -p PATH, --path PATH  specify current folder.
+  -p PATH, --path PATH  specify target folder.
   -d DEPTH, --depth DEPTH
                         generate using depth.
   -s SEPARATOR, --separator SEPARATOR
@@ -28,7 +28,7 @@ options:
                         append to final using list. Ex.: -r 1-10 -A files.txt
   -f FUZZ, --fuzz FUZZ  fuzz script. Ex.: -f "./script.sh FUZZ".
   -e ENCODING, --encoding ENCODING
-                        Available encodings: urlencode, doubleencode, base64.
+                        available encodings: urlencode, doubleencode, base64.
   -o OUTPUT, --output OUTPUT
                         Save output to a file (append).
   -t, --trim            replace duplicated bars.

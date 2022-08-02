@@ -23,14 +23,14 @@ banner = '''
 '''
 parser = argparse.ArgumentParser(description=banner, formatter_class=RawTextHelpFormatter)
 
-parser.add_argument('-p','--path', dest='path', action='store', type=str, help='specify current folder.', required=False)
+parser.add_argument('-p','--path', dest='path', action='store', type=str, help='specify target folder.', required=False)
 parser.add_argument('-d','--depth', dest='depth', action='store', type=int, help='generate using depth.', required=False)
 parser.add_argument('-s','--separator', dest='separator', action='store', type=str, help='custom separator.', required=False, default='/')
 parser.add_argument('-r','--range', dest='range', action='store', type=str, help='generate a list. Ex.: 1-10.', required=False, default='/')
 parser.add_argument('-a','--append', dest='append', action='store', type=str, help='append to final.', required=False, default='')
 parser.add_argument('-A','--Append', dest='Append', action='store', type=str, help='append to final using list. Ex.: -r 1-10 -A files.txt', required=False)
 parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='fuzz script. Ex.: -f "./script.sh FUZZ".', required=False)
-parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='Available encodings: urlencode, doubleencode, base64.', required=False)
+parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='available encodings: urlencode, doubleencode, base64.', required=False)
 parser.add_argument('-o','--output', dest='output', action='store', type=str, help='Save output to a file (append).', required=False)
 
 
