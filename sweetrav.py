@@ -22,18 +22,29 @@ banner = '''
 '''
 parser = argparse.ArgumentParser(description=banner, formatter_class=RawTextHelpFormatter)
 
-parser.add_argument('-p','--path', dest='path', action='store', type=str, help='Specify current folder.', required=False)
-parser.add_argument('-d','--depth', dest='depth', action='store', type=int, help='Generate using depth.', required=False)
-parser.add_argument('-s','--separator', dest='separator', action='store', type=str, help='Custom separator.', required=False, default='/')
-parser.add_argument('-r','--range', dest='range', action='store', type=str, help='Generate a list. Ex.: 1-10.', required=False, default='/')
-parser.add_argument('-a','--append', dest='append', action='store', type=str, help='Append to final.', required=False, default='')
-parser.add_argument('-A','--Append', dest='Append', action='store', type=str, help='Append to final using list. Ex.: -r 1-10 -A files.txt', required=False)
-parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='Fuzz script. Ex.: -f "./script.sh FUZZ".', required=False)
+parser.add_argument('-p','--path', dest='path', action='store', type=str, help='specify current folder.', required=False)
+parser.add_argument('-d','--depth', dest='depth', action='store', type=int, help='generate using depth.', required=False)
+parser.add_argument('-s','--separator', dest='separator', action='store', type=str, help='custom separator.', required=False, default='/')
+parser.add_argument('-r','--range', dest='range', action='store', type=str, help='generate a list. Ex.: 1-10.', required=False, default='/')
+parser.add_argument('-a','--append', dest='append', action='store', type=str, help='append to final.', required=False, default='')
+parser.add_argument('-A','--Append', dest='Append', action='store', type=str, help='append to final using list. Ex.: -r 1-10 -A files.txt', required=False)
+parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='fuzz script. Ex.: -f "./script.sh FUZZ".', required=False)
 
-parser.add_argument('-i', dest='stdin', help='Use stdin pipe.', action='store_true')
+
+parser.add_argument('-t','--trim', dest='clear', help='replace duplicated bars.', action='store_true')
+parser.add_argument('-i', dest='stdin', help='use stdin pipe.', action='store_true')
+
 
 
 args = parser.parse_args()
+
+def prnt(payload, ignoreFuzz = False):
+    if args.clear:
+        payload = payload.replace('//','').replace('\\\\', '\\')
+    if not ignoreFuzz:
+        fuzz(payload)
+    print(payload)
+    
 
 def fuzz(payload):
     cmd = str(args.fuzz).replace('FUZZ', payload)
@@ -48,8 +59,9 @@ def gen_traversal(count, separator = '/', ignoreAppend = False):
         data = read_file(args.Append)
         for d in data:       
             res = ("../" * count) + d
-            fuzz(res.replace('/', separator))
-            print(res.replace('/', separator))
+            prnt(res.replace('/', separator))
+            #fuzz(res.replace('/', separator))
+            #print(res.replace('/', separator))
         return ''
     else:
         result = result.replace('/', separator)
@@ -71,8 +83,9 @@ def back_root(path, separator = '/'):
 def from_list(lst, separator = '/', append = ''):
     for l in lst:
         res = back_root(l.rstrip(), separator) + append
-        fuzz(res)
-        print(res)
+        prnt(res)
+        #fuzz(res)
+        #print(res)
 
 def read_file(path):
     f = open(path, 'r')
@@ -103,8 +116,9 @@ def range_list(rng, separator = '/', append = ''):
 
     for i in range(mi, mx + 1):
         res = gen_traversal(i, separator) + append
-        fuzz(res)
-        print(res)
+        prnt(res)
+        #fuzz(res)
+        #print(res)
 
     return
 
@@ -122,11 +136,11 @@ if len(stdin_input) >= 1:
     exit()
 
 if args.path is None and args.depth is not None:
-    print(gen_traversal(args.depth, args.separator) + args.append)
+    prnt(gen_traversal(args.depth, args.separator) + args.append, ignoreFuzz=True)
     exit()
 
 if args.path is None and args.range is not None:
     range_list(args.range, args.separator, args.append )
     exit()
 
-print(back_root(args.path,  args.separator) + args.append)
+prnt(back_root(args.path,  args.separator) + args.append, ignoreFuzz=True )
