@@ -1,5 +1,5 @@
 ```
-usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-A APPEND] [-f FUZZ] [-i]
+usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-A APPEND] [-f FUZZ] [-t] [-i]
 
           __    __    _______                  _
          / /   / /   / / ____|                | |
@@ -14,19 +14,20 @@ usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEN
 
 options:
   -h, --help            show this help message and exit
-  -p PATH, --path PATH  Specify current folder.
+  -p PATH, --path PATH  specify current folder.
   -d DEPTH, --depth DEPTH
-                        Generate using depth.
+                        generate using depth.
   -s SEPARATOR, --separator SEPARATOR
-                        Custom separator.
+                        custom separator.
   -r RANGE, --range RANGE
-                        Generate a list. Ex.: 1-10.
+                        generate a list. Ex.: 1-10.
   -a APPEND, --append APPEND
-                        Append to final.
+                        append to final.
   -A APPEND, --Append APPEND
-                        Append to final using list. Ex.: -r 1-10 -A files.txt
-  -f FUZZ, --fuzz FUZZ  Fuzz script. Ex.: -f "./script.sh FUZZ".
-  -i                    Use stdin pipe.
+                        append to final using list. Ex.: -r 1-10 -A files.txt
+  -f FUZZ, --fuzz FUZZ  fuzz script. Ex.: -f "./script.sh FUZZ".
+  -t, --trim            replace duplicated bars.
+  -i                    use stdin pipe.
 
 ```
 
