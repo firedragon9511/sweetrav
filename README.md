@@ -23,7 +23,7 @@ options:
                         Generate a list, ex.: 1-10.
   -a APPEND, --append APPEND
                         Append to final.
-  -f FUZZ, --fuzz FUZZ  Fuzzy script, ex.: -f "./script.sh FUZZ".
+  -f FUZZ, --fuzz FUZZ  Fuzz script, ex.: -f "./script.sh FUZZ".
   -i                    Use stdin pipe.
 
 ```
