@@ -119,8 +119,9 @@ def range_list(rng, separator = '/', append = ''):
         for d in data:
             for i in range(mi, mx + 1):
                 res = gen_traversal(i, separator, ignoreAppend=True) + d
-                fuzz(res)
-                print(res)
+                prnt(res)
+                #fuzz(res)
+                #print(res)
         return
 
 
