@@ -31,7 +31,7 @@ parser.add_argument('-a','--append', dest='append', action='store', type=str, he
 parser.add_argument('-ab','--append-begin', dest='appendbegin', action='store', type=str, help='append to begin of all payloads.', required=False, default='')
 parser.add_argument('-A','--Append', dest='Append', action='store', type=str, help='append to final of all payloads using a list. Ex.: -r 1-10 -A files.txt', required=False)
 parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='pass payloads to a script. Ex.: -f "./script.sh FUZZ".', required=False)
-parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='encode all payloads. Available encodings: urlencode, doubleencode, base64, lfi, lfi2. lfi3.', required=False)
+parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='encode all payloads. Available encodings: urlencode, doubleencode, base64, hex_x, lfi, lfi2. lfi3.', required=False)
 parser.add_argument('-o','--output', dest='output', action='store', type=str, help='save output to a file (append).', required=False)
 # Boolean params
 parser.add_argument('-t','--trim', dest='clear', help='replace duplicated bars.', action='store_true')
@@ -53,8 +53,9 @@ def prnt(payload, ignoreFuzz = False):
         if args.encoding == 'hex_x':
             result = ''
             for c in payload:
-                result = result + '/x' + str(("0x%02x" % hex(c)))
-
+                enc = "%02x" % ord(c)
+                result = result + '\\x' + enc
+            payload = result
         if args.encoding == 'lfi':
             payload = payload.replace('../', '....//').replace('..\\', '....\\\\')
         if args.encoding == 'lfi2':

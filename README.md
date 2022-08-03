@@ -30,7 +30,7 @@ options:
                         append to final of all payloads using a list. Ex.: -r 1-10 -A files.txt
   -f FUZZ, --fuzz FUZZ  pass payloads to a script. Ex.: -f "./script.sh FUZZ".
   -e ENCODING, --encoding ENCODING
-                        encode all payloads. Available encodings: urlencode, doubleencode, base64, lfi, lfi2. lfi3.
+                        encode all payloads. Available encodings: urlencode, doubleencode, base64, hex_x, lfi, lfi2. lfi3.
   -o OUTPUT, --output OUTPUT
                         save output to a file (append).
   -t, --trim            replace duplicated bars.
