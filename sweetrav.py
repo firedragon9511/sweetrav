@@ -24,7 +24,7 @@ banner = '''
 parser = argparse.ArgumentParser(description=banner, formatter_class=RawTextHelpFormatter)
 
 parser.add_argument('-p','--path', dest='path', action='store', type=str, help='pass a path and generate a path traversal paylaod based on this path to bring it back to the root of the system.', required=False)
-parser.add_argument('-d','--depth', dest='depth', action='store', type=int, help='generate payloads using a depth number.', required=False)
+parser.add_argument('-d','--depth', dest='depth', action='store', type=int, help='generate payload using a depth number.', required=False)
 parser.add_argument('-s','--separator', dest='separator', action='store', type=str, help='use custom separator instead bar.', required=False, default='/')
 parser.add_argument('-r','--range', dest='range', action='store', type=str, help='generate a payload wordlist. Ex.: 1-10.', required=False, default='/')
 parser.add_argument('-a','--append', dest='append', action='store', type=str, help='append to final of all payloads.', required=False, default='')

@@ -17,7 +17,7 @@ options:
   -h, --help            show this help message and exit
   -p PATH, --path PATH  pass a path and generate a path traversal paylaod based on this path to bring it back to the root of the system.
   -d DEPTH, --depth DEPTH
-                        generate payloads using a depth number.
+                        generate payload using a depth number.
   -s SEPARATOR, --separator SEPARATOR
                         use custom separator instead bar.
   -r RANGE, --range RANGE
