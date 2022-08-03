@@ -15,26 +15,26 @@ usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEN
 
 options:
   -h, --help            show this help message and exit
-  -p PATH, --path PATH  specify target folder.
+  -p PATH, --path PATH  pass a path and generate a path traversal paylaod based on this path to bring it back to the root of the system.
   -d DEPTH, --depth DEPTH
-                        generate using depth.
+                        generate payloads using a depth number.
   -s SEPARATOR, --separator SEPARATOR
-                        custom separator.
+                        use custom separator instead bar.
   -r RANGE, --range RANGE
-                        generate a list. Ex.: 1-10.
+                        generate a payload wordlist. Ex.: 1-10.
   -a APPEND, --append APPEND
-                        append to final.
+                        append to final of all payloads.
   -ab APPENDBEGIN, --append-begin APPENDBEGIN
-                        append to begin.
+                        append to begin of all payloads.
   -A APPEND, --Append APPEND
-                        append to final using list. Ex.: -r 1-10 -A files.txt
-  -f FUZZ, --fuzz FUZZ  fuzz script. Ex.: -f "./script.sh FUZZ".
+                        append to final of all payloads using a list. Ex.: -r 1-10 -A files.txt
+  -f FUZZ, --fuzz FUZZ  pass payloads to a script. Ex.: -f "./script.sh FUZZ".
   -e ENCODING, --encoding ENCODING
-                        available encodings: urlencode, doubleencode, base64, lfi, lfi2. lfi3.
+                        encode all payloads. Available encodings: urlencode, doubleencode, base64, lfi, lfi2. lfi3.
   -o OUTPUT, --output OUTPUT
-                        Save output to a file (append).
+                        save output to a file (append).
   -t, --trim            replace duplicated bars.
-  -n, --no-output       use stdin pipe.
+  -n, --no-output       don't print any output if you just want to see the fuzzing output.
   -i                    use stdin pipe.
 
 ```
