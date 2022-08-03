@@ -1,0 +1,8 @@
+/etc/passwd
+/etc/shadow
+/etc/bashrc
+/etc/crontab
+/etc/hosts
+/etc/resolv.conf
+/etc/aliases
+/etc/profile

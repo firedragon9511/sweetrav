@@ -28,9 +28,10 @@ parser.add_argument('-d','--depth', dest='depth', action='store', type=int, help
 parser.add_argument('-s','--separator', dest='separator', action='store', type=str, help='custom separator.', required=False, default='/')
 parser.add_argument('-r','--range', dest='range', action='store', type=str, help='generate a list. Ex.: 1-10.', required=False, default='/')
 parser.add_argument('-a','--append', dest='append', action='store', type=str, help='append to final.', required=False, default='')
+parser.add_argument('-ab','--append-begin', dest='appendbegin', action='store', type=str, help='append to begin.', required=False, default='')
 parser.add_argument('-A','--Append', dest='Append', action='store', type=str, help='append to final using list. Ex.: -r 1-10 -A files.txt', required=False)
 parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='fuzz script. Ex.: -f "./script.sh FUZZ".', required=False)
-parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='available encodings: urlencode, doubleencode, base64.', required=False)
+parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='available encodings: urlencode, doubleencode, base64, lfi, lfi2. lfi3.', required=False)
 parser.add_argument('-o','--output', dest='output', action='store', type=str, help='Save output to a file (append).', required=False)
 
 
@@ -47,10 +48,18 @@ args = parser.parse_args()
 def prnt(payload, ignoreFuzz = False):
     global output_file
 
+    payload = args.appendbegin + payload
+
     if args.clear:
         payload = payload.replace('//','/').replace('\\\\', '\\')
 
     if args.encoding is not None:
+        if args.encoding == 'lfi':
+            payload = payload.replace('../', '....//').replace('..\\', '....\\\\')
+        if args.encoding == 'lfi2':
+            payload = payload.replace('../', '...//').replace('..\\', '...\\\\')
+        if args.encoding == 'lfi3':
+            payload = payload.replace('../', '.....///').replace('..\\', '.....\\\\\\')
         if args.encoding == 'base64':
             payload = base64.b64encode(payload.encode('ascii')).decode('ascii')
         if args.encoding == 'urlencode':

@@ -1,6 +1,6 @@
 ## Usage
 ```
-usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-A APPEND] [-f FUZZ] [-e ENCODING] [-o OUTPUT] [-t] [-i]
+usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-ab APPENDBEGIN] [-A APPEND] [-f FUZZ] [-e ENCODING] [-o OUTPUT] [-t] [-i]
 
           __    __    _______                  _
          / /   / /   / / ____|                | |
@@ -24,11 +24,13 @@ options:
                         generate a list. Ex.: 1-10.
   -a APPEND, --append APPEND
                         append to final.
+  -ab APPENDBEGIN, --append-begin APPENDBEGIN
+                        append to begin.
   -A APPEND, --Append APPEND
                         append to final using list. Ex.: -r 1-10 -A files.txt
   -f FUZZ, --fuzz FUZZ  fuzz script. Ex.: -f "./script.sh FUZZ".
   -e ENCODING, --encoding ENCODING
-                        available encodings: urlencode, doubleencode, base64.
+                        available encodings: urlencode, doubleencode, base64, lfi, lfi2. lfi3.
   -o OUTPUT, --output OUTPUT
                         Save output to a file (append).
   -t, --trim            replace duplicated bars.
