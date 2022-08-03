@@ -1,6 +1,6 @@
 ## Usage
 ```
-usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-ab APPENDBEGIN] [-A APPEND] [-f FUZZ] [-e ENCODING] [-o OUTPUT] [-t] [-i]
+usage: sweetrav.py [-h] [-p PATH] [-d DEPTH] [-s SEPARATOR] [-r RANGE] [-a APPEND] [-ab APPENDBEGIN] [-A APPEND] [-f FUZZ] [-e ENCODING] [-o OUTPUT] [-t] [-n] [-i]
 
           __    __    _______                  _
          / /   / /   / / ____|                | |
@@ -34,6 +34,7 @@ options:
   -o OUTPUT, --output OUTPUT
                         Save output to a file (append).
   -t, --trim            replace duplicated bars.
+  -n, --no-output       use stdin pipe.
   -i                    use stdin pipe.
 
 ```

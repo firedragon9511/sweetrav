@@ -33,22 +33,18 @@ parser.add_argument('-A','--Append', dest='Append', action='store', type=str, he
 parser.add_argument('-f','--fuzz', dest='fuzz', action='store', type=str, help='fuzz script. Ex.: -f "./script.sh FUZZ".', required=False)
 parser.add_argument('-e','--encoding', dest='encoding', action='store', type=str, help='available encodings: urlencode, doubleencode, base64, lfi, lfi2. lfi3.', required=False)
 parser.add_argument('-o','--output', dest='output', action='store', type=str, help='Save output to a file (append).', required=False)
-
-
-
+# Boolean params
 parser.add_argument('-t','--trim', dest='clear', help='replace duplicated bars.', action='store_true')
+parser.add_argument('-n', '--no-output', dest='nooutput', help='use stdin pipe.', action='store_true')
 parser.add_argument('-i', dest='stdin', help='use stdin pipe.', action='store_true')
 
-
-
 args = parser.parse_args()
-
-
 
 def prnt(payload, ignoreFuzz = False):
     global output_file
 
     payload = args.appendbegin + payload
+    payload = payload + args.append
 
     if args.clear:
         payload = payload.replace('//','/').replace('\\\\', '\\')
@@ -73,7 +69,8 @@ def prnt(payload, ignoreFuzz = False):
     if not ignoreFuzz:
         fuzz(payload)
 
-    print(payload)
+    if not args.nooutput:
+        print(payload)
     
 
 def fuzz(payload):
@@ -90,12 +87,10 @@ def gen_traversal(count, separator = '/', ignoreAppend = False):
         for d in data:       
             res = ("../" * count) + d
             prnt(res.replace('/', separator))
-            #fuzz(res.replace('/', separator))
-            #print(res.replace('/', separator))
+
         return ''
     else:
         result = result.replace('/', separator)
-        #fuzz(result)
         return result
 
 
@@ -107,15 +102,13 @@ def back_root(path, separator = '/'):
         path = path[:-1]
 
     result = gen_traversal(path.count('/'),  separator=separator)
-    #fuzz(result)
+
     return result
 
-def from_list(lst, separator = '/', append = ''):
+def from_list(lst, separator = '/'):
     for l in lst:
-        res = back_root(l.rstrip(), separator) + append
+        res = back_root(l.rstrip(), separator)
         prnt(res)
-        #fuzz(res)
-        #print(res)
 
 def read_file(path):
     f = open(path, 'r')
@@ -123,7 +116,7 @@ def read_file(path):
     f.close()
     return data
 
-def range_list(rng, separator = '/', append = ''):
+def range_list(rng, separator = '/'):
     mi = 0
     mx = 0
 
@@ -138,18 +131,16 @@ def range_list(rng, separator = '/', append = ''):
         data = read_file(args.Append)
         for d in data:
             for i in range(mi, mx + 1):
-                res = gen_traversal(i, separator, ignoreAppend=True) + d
+                res = gen_traversal(i, separator, ignoreAppend=False) + d
                 prnt(res)
-                #fuzz(res)
-                #print(res)
+
         return
 
 
     for i in range(mi, mx + 1):
-        res = gen_traversal(i, separator) + append
+        res = gen_traversal(i, separator)
         prnt(res)
-        #fuzz(res)
-        #print(res)
+
 
     return
 
@@ -166,18 +157,18 @@ if args.stdin:
         pass
 
 if len(stdin_input) >= 1:
-    from_list(stdin_input, args.separator, args.append)
+    from_list(stdin_input, args.separator)
     exit()
 
 if args.path is None and args.depth is not None:
-    prnt(gen_traversal(args.depth, args.separator) + args.append, ignoreFuzz=True)
+    prnt(gen_traversal(args.depth, args.separator), ignoreFuzz=True)
     exit()
 
 if args.path is None and args.range is not None:
-    range_list(args.range, args.separator, args.append )
+    range_list(args.range, args.separator)
     exit()
 
-prnt(back_root(args.path,  args.separator) + args.append, ignoreFuzz=True )
+prnt(back_root(args.path,  args.separator), ignoreFuzz=True )
 
 if output_file is not None:
     output_file.close()
