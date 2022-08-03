@@ -50,6 +50,11 @@ def prnt(payload, ignoreFuzz = False):
         payload = payload.replace('//','/').replace('\\\\', '\\')
 
     if args.encoding is not None:
+        if args.encoding == 'hex_x':
+            result = ''
+            for c in payload:
+                result = result + '/x' + str(("0x%02x" % hex(c)))
+
         if args.encoding == 'lfi':
             payload = payload.replace('../', '....//').replace('..\\', '....\\\\')
         if args.encoding == 'lfi2':
