@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser(description=banner, formatter_class=RawTextHelp
 parser.add_argument('-p','--path', dest='path', action='store', type=str, help='pass a path and generate a path traversal paylaod based on this path to bring it back to the root of the system.', required=False)
 parser.add_argument('-d','--depth', dest='depth', action='store', type=int, help='generate payload using a depth number.', required=False)
 parser.add_argument('-s','--separator', dest='separator', action='store', type=str, help='use custom separator instead bar.', required=False, default='/')
-parser.add_argument('-r','--range', dest='range', action='store', type=str, help='generate a payload wordlist. Ex.: 1-10.', required=False, default='/')
+parser.add_argument('-r','--range', dest='range', action='store', type=str, help='generate a payload wordlist. Ex.: 1-10.', required=False)
 parser.add_argument('-a','--append', dest='append', action='store', type=str, help='append to final of all payloads.', required=False, default='')
 parser.add_argument('-ab','--append-begin', dest='appendbegin', action='store', type=str, help='append to begin of all payloads.', required=False, default='')
 parser.add_argument('-A','--Append', dest='Append', action='store', type=str, help='append to final of all payloads using a list. Ex.: -r 1-10 -A files.txt', required=False)
@@ -174,7 +174,8 @@ if args.path is None and args.range is not None:
     range_list(args.range, args.separator)
     exit()
 
-prnt(back_root(args.path,  args.separator), ignoreFuzz=True )
+if args.path is not None:
+    prnt(back_root(args.path,  args.separator), ignoreFuzz=True )
 
 if output_file is not None:
     output_file.close()
